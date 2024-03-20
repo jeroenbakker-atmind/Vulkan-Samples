@@ -264,6 +264,21 @@ cmake --build build/mac --config Release --target vulkan_samples -j4
 ./build/mac/app/bin/Release/x86_64/vulkan_samples --help
 ----
 
+=== Build with Xcode
+
+CMake can be used to generate the xcode project.
+
+----
+cmake -G Xcode -Bbuild/mac-xcode -DCMAKE_BUILD_TYPE=Release
+----
+
+In Xcode open an existing project and navigate to
+`./build/mac-xcode/vulkan_samples.xcodeproj`. Confirm the popup asking to
+automatically create scemes.
+
+Select the `vulkan-samples` scheme.
+
+
 == Android
 
 === Dependencies
