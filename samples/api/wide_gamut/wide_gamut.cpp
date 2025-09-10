@@ -38,25 +38,6 @@ bool WideGamut::prepare(const vkb::ApplicationOptions &options)
 		return false;
 	}
 
-	// Load a scene from the assets folder
-	load_scene("scenes/sponza/Sponza01.gltf");
-
-	// Attach a move script to the camera component in the scene
-	auto &camera_node = vkb::add_free_camera(get_scene(), "main_camera", get_render_context().get_surface_extent());
-	auto  camera      = &camera_node.get_component<vkb::sg::Camera>();
-
-	// Example Scene Render Pipeline
-	vkb::ShaderSource vert_shader("base.vert.spv");
-	vkb::ShaderSource frag_shader("base.frag.spv");
-	auto              scene_subpass   = std::make_unique<vkb::ForwardSubpass>(get_render_context(), std::move(vert_shader), std::move(frag_shader), get_scene(), *camera);
-	auto              render_pipeline = std::make_unique<vkb::RenderPipeline>();
-	render_pipeline->add_subpass(std::move(scene_subpass));
-	set_render_pipeline(std::move(render_pipeline));
-
-	// Add a GUI with the stats you want to monitor
-	get_stats().request_stats({/*stats you require*/});
-	create_gui(*window, &get_stats());
-
 	return true;
 }
 
@@ -70,7 +51,7 @@ void WideGamut::render(float /*delta_time*/)
 	{
 		return;
 	}
-	//draw();
+	// submit command buffer for frame to the queue
 }
 
 /**

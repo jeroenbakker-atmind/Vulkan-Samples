@@ -36,6 +36,31 @@ class WideGamut : public ApiVulkanSample
 		int format_index = 0;
 	} surface;
 
+	VkDescriptorSet       descriptor_set;
+	VkDescriptorSetLayout descriptor_set_layout;
+
+	/**
+	 * Contains the handles to engine vulkan resources. The engine renders out to a Rec709 linear image.
+	 */
+	struct
+	{
+		VkPipeline       pipeline;
+		VkPipelineLayout pipeline_layout;
+	} engine;
+
+	/**
+	 * Contains the handles to convert the engine output from Rec709 to extended sRGB non linear.
+	 *
+	 * Drawing the UI on extended sRGB non linear ensure that the colors would not be off when using a different color space output
+	 */
+	struct
+	{
+	} ui;
+
+	struct
+	{
+	} output;
+
   public:
 	WideGamut();
 
